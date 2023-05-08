@@ -56,9 +56,11 @@ async def generate_languages(s: Stats) -> None:
     with open("templates/languages.svg", "r") as f:
         output = f.read()
 
+    langs = await s.languages
+    langs["Python"]["size"] = langs.pop("Jupyter Notebook", 0) + langs.get("Python", 0)
     progress = ""
     lang_list = ""
-    sorted_languages = sorted((await s.languages).items(), reverse=True,
+    sorted_languages = sorted((langs).items(), reverse=True,
                               key=lambda t: t[1].get("size"))
     delay_between = 150
     for i, (lang, data) in enumerate(sorted_languages):
