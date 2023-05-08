@@ -58,6 +58,7 @@ async def generate_languages(s: Stats) -> None:
 
     langs = await s.languages
     langs["Python"]["size"] = langs.pop("Jupyter Notebook", 0)/2 + langs.get("Python", 0)
+    langs["PHP"]["size"] = langs.pop("Blade", 0)/2 + langs.get("PHP", 0)
     progress = ""
     lang_list = ""
     sorted_languages = sorted((langs).items(), reverse=True,
