@@ -57,8 +57,8 @@ async def generate_languages(s: Stats) -> None:
         output = f.read()
 
     langs = await s.languages
-    langs["Python"]["size"] = langs["Jupyter Notebook"]["size"]/2 + langs["Python"]["size"]
-    langs["PHP"]["size"] = langs["Blade"]["size"]/2 + langs["PHP"]["size"]
+    langs["Python"]["size"] = langs.get("Jupyter Notebook", 0)["size"]/2 + langs.get("Python",0)["size"]
+    langs["PHP"]["size"] = langs.get("Blade",0)["size"]/2 + langs.get("PHP",0)["size"]
     langs.pop("Jupyter Notebook")
     langs.pop("Blade")
     progress = ""
