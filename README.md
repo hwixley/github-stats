@@ -1,3 +1,9 @@
+# My fork
+
+Setup language aliases to couple same languages with different file extensions into the same statistic. For example, Jupyter Notebook files should be classified as Python.
+
+<hr>
+
 # [GitHub Stats Visualization](https://github.com/jstrieb/github-stats)
 
 <a href="https://github.com/jstrieb/github-stats">
