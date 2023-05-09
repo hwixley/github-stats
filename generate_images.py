@@ -60,8 +60,8 @@ async def generate_languages(s: Stats) -> None:
     print(langs)
     print(langs.keys)
     default_lang = {"size": 0}
-    langs["Python"]["size"] = await langs.get("Jupyter Notebook", default_lang)["size"] + await langs.get("Python",default_lang)["size"]
-    langs["PHP"]["size"] = await langs.get("Blade",default_lang)["size"] + await langs.get("PHP",default_lang)["size"]
+    langs["Python"]["size"] = langs.get("Jupyter Notebook", default_lang)["size"] + langs.get("Python",default_lang)["size"]
+    langs["PHP"]["size"] = langs.get("Blade",default_lang)["size"] + langs.get("PHP",default_lang)["size"]
     langs.pop("Jupyter Notebook", None)
     langs.pop("Blade", None)
     langs_total = sum([v.get("size", 0) for v in langs.values()])
