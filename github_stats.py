@@ -331,25 +331,14 @@ Languages:
                     languages = await self.languages
                     if name in self._exclude_langs: continue
                     if name in languages:
-                        if name == "Jupyter Notebook":
-                            languages["python"]["size"] += lang.get("size", 0)/6
-                            languages["python"]["occurrences"] += 1
-                        else:
-                            languages[name]["size"] += lang.get("size", 0)
-                            languages[name]["occurrences"] += 1
+                        languages[name]["size"] += lang.get("size", 0)
+                        languages[name]["occurrences"] += 1
                     else:
-                        if name == "Jupyter Notebook":
-                            languages["python"] = {
-                                "size": lang.get("size", 0)/6,
-                                "occurrences": 1,
-                                "color": "#F0F8FF"
-                            }
-                        else:
-                            languages[name] = {
-                                "size": lang.get("size", 0),
-                                "occurrences": 1,
-                                "color": lang.get("node", {}).get("color")
-                            }
+                        languages[name] = {
+                            "size": lang.get("size", 0),
+                            "occurrences": 1,
+                            "color": lang.get("node", {}).get("color")
+                        }
 
             if owned_repos.get("pageInfo", {}).get("hasNextPage", False) or \
                     contrib_repos.get("pageInfo", {}).get("hasNextPage", False):
