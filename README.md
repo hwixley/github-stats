@@ -2,6 +2,8 @@
 
 Setup language aliases to couple same languages with different file extensions into the same statistic. For example, Jupyter Notebook files should be classified as Python.
 
+**Note** - there seems to be a bug with the lines of code changed on the overview card
+
 <hr>
 
 # [GitHub Stats Visualization](https://github.com/jstrieb/github-stats)
