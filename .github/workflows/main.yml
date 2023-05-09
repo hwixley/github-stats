@@ -15,11 +15,6 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-  builWorkflow syntax for GitHub Actions
-￼
-GitHub
-https://docs.github.com › actions › using-workflows
-Use the branches filter when d:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
