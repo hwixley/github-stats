@@ -58,8 +58,7 @@ async def generate_languages(s: Stats) -> None:
         output = f.read()
 
     langs = await s.languages
-    print(langs)
-    print(langs.keys)
+    
     default_lang = {"size": 0}
     lang_aliases = { "Python": "Jupyter Notebook", "PHP": "Blade"}
     for key, value in lang_aliases.items():
@@ -72,6 +71,8 @@ async def generate_languages(s: Stats) -> None:
     lang_list = ""
     sorted_languages = sorted((langs).items(), reverse=True,
                               key=lambda t: t[1].get("size"))
+
+    print(sorted_languages)
     delay_between = 150
     for i, (lang, data) in enumerate(sorted_languages):
         color = data.get("color")
