@@ -101,7 +101,9 @@ fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path></svg>
     if os.path.isfile("generated/languages.svg"):
         print("Removing old languages.svg")
         os.remove("generated/languages.svg")
+        
     with open("generated/languages.svg", "w") as f:
+        print("Writing new languages.svg")
         f.write(output)
 
 
