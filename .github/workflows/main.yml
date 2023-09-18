@@ -8,7 +8,7 @@ on:
   push:
     branches: [ master, test-langs, darkmode, merge-author ]
   schedule:
-    - cron: "5 0 * * *"
+    - cron: "0 0 0 ? * MON,TUE,WED,THU,FRI *" # "5 0 * * *"
   workflow_dispatch:
 
 permissions:
