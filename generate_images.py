@@ -58,7 +58,7 @@ async def generate_languages(s: Stats) -> None:
         output = f.read()
 
     langs = await s.languages
-    print(langs.keys)
+    print(langs.keys())
 
     default_lang = {"size": 0}
     lang_aliases = { "Python": "Jupyter Notebook", "PHP": "Blade"}
