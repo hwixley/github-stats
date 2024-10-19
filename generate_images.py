@@ -61,7 +61,6 @@ async def generate_languages(s: Stats) -> None:
 
     default_lang = {"size": 0}
     lang_aliases = { "Python": "Jupyter Notebook", "PHP": "Blade"}
-    print(langs)
     for key, value in lang_aliases.items():
         lang_size = langs.get(key, default_lang)["size"] if key in langs.keys() else 0
         langs[key]["size"] = lang_size + langs.get(value, default_lang)["size"]/15
