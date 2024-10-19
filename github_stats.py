@@ -270,7 +270,7 @@ All-time contributions: {await self.total_contributions:,}
 Repositories with contributions: {len(await self.repos)}
 Lines of code added: {lines_changed[0]:,}
 Lines of code deleted: {lines_changed[1]:,}
-Lines of code changed: {lines_changed[0]:,}
+Lines of code changed: {lines_changed[0] + lines_changed[1]:,}
 Project page views: {await self.views:,}
 Languages:
   - {formatted_languages}"""
@@ -456,7 +456,7 @@ Languages:
         additions = 0
         deletions = 0
         for repo in await self.repos:
-            r = await self.queries.query_rest(f"/repos/{repo}/stats/contributors")
+            r = await self.queries.query_rest(f"/repos/{self.username}/{repo}/stats/contributors")
             for author_obj in r:
                 # Handle malformed response from the API by skipping this repo
                 if (not isinstance(author_obj, dict)
@@ -484,7 +484,7 @@ Languages:
 
         total = 0
         for repo in await self.repos:
-            r = await self.queries.query_rest(f"/repos/{repo}/traffic/views")
+            r = await self.queries.query_rest(f"/repos/{self.username}/{repo}/traffic/views")
             for view in r.get("views", []):
                 total += view.get("count", 0)
 
