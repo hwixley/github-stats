@@ -54,52 +54,57 @@ async def generate_languages(s: Stats) -> None:
     Generate an SVG badge with summary languages used
     :param s: Represents user's GitHub statistics
     """
-    with open("templates/languages.svg", "r") as f:
-        output = f.read()
+    iters = [
+        ("languages-filecount.svg", "occurrences"),
+        ("languages-filesize.svg", "size")
+    ]
+    for fname, INDEX_KEY in iters:
+        with open(f"templates/{fname}", "r") as f:
+            output = f.read()
 
-    langs = await s.languages
-    INDEX_KEY = "occurrences"
+        langs = await s.languages
 
-    langs_total = sum([v.get(INDEX_KEY, 0) for v in langs.values()])
-    for key, value in langs.items():
-        langs[key]["prop"] = value.get(INDEX_KEY, 0) / langs_total * 100
-    progress = ""
-    lang_list = ""
-    sorted_languages = sorted((langs).items(), reverse=True,
-                              key=lambda t: t[1].get(INDEX_KEY))
+        langs_total = sum([v.get(INDEX_KEY, 0) for v in langs.values()])
+        for key, value in langs.items():
+            langs[key]["prop"] = value.get(INDEX_KEY, 0) / langs_total * 100
+        progress = ""
+        lang_list = ""
+        sorted_languages = sorted((langs).items(), reverse=True,
+                                key=lambda t: t[1].get(INDEX_KEY))
 
-    delay_between = 150
-    for i, (lang, data) in enumerate(sorted_languages):
-        color = data.get("color")
-        color = color if color is not None else "#000000"
+        delay_between = 150
+        for i, (lang, data) in enumerate(sorted_languages):
+            color = data.get("color")
+            color = color if color is not None else "#000000"
 
-        progress += (
-            f'<span style="background-color: {color};'
-            f'width: {data.get("prop", 0):0.3f}%;" '
-            f'class="progress-item"></span>'
-        )
-        lang_list += f"""
-<li style="animation-delay: {i * delay_between}ms;">
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:{color};"
-viewBox="0 0 16 16" version="1.1" width="16" height="16"><path
-fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path></svg>
-<span class="lang">{lang}</span>
-<span class="percent">{data.get("prop", 0):0.2f}%</span>
-</li>
+            progress += (
+                f'<span style="background-color: {color};'
+                f'width: {data.get("prop", 0):0.3f}%;" '
+                f'class="progress-item"></span>'
+            )
+            lang_list += f"""
+    <li style="animation-delay: {i * delay_between}ms;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:{color};"
+    viewBox="0 0 16 16" version="1.1" width="16" height="16"><path
+    fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+    <span class="lang">{lang}</span>
+    <span class="percent">{data.get("prop", 0):0.2f}%</span>
+    </li>
 
-"""
+    """
 
-    output = re.sub(r"{{ progress }}", progress, output)
-    output = re.sub(r"{{ lang_list }}", lang_list, output)
+        output = re.sub(r"{{ progress }}", progress, output)
+        output = re.sub(r"{{ lang_list }}", lang_list, output)
 
-    generate_output_folder()
-    if os.path.isfile("generated/languages.svg"):
-        print("Removing old languages.svg")
-        os.remove("generated/languages.svg")
-        
-    with open("generated/languages.svg", "w") as f:
-        print("Writing new languages.svg")
-        f.write(output)
+        generate_output_folder()
+        fpath = f"generated/{fname}"
+        if os.path.isfile(fpath):
+            print(f"Removing old {fname}")
+            os.remove(fpath)
+            
+        with open(fpath, "w") as f:
+            print(f"Writing new {fname}")
+            f.write(output)
 
 
 ################################################################################
