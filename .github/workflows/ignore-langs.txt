@@ -1,1 +1,1 @@
-CMake,HTML,SCSS,CSS,Makefile,TeX,PostScript
+CMake,HTML,SCSS,CSS,Makefile,TeX,PostScript,Jupyter Notebook
