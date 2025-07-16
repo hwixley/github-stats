@@ -58,14 +58,15 @@ async def generate_languages(s: Stats) -> None:
         output = f.read()
 
     langs = await s.languages
+    INDEX_KEY = "occurrences"
 
-    langs_total = sum([v.get("occurrences", 0) for v in langs.values()])
+    langs_total = sum([v.get(INDEX_KEY, 0) for v in langs.values()])
     for key, value in langs.items():
-        langs[key]["prop"] = value.get("occurrences", 0) / langs_total * 100
+        langs[key]["prop"] = value.get(INDEX_KEY, 0) / langs_total * 100
     progress = ""
     lang_list = ""
     sorted_languages = sorted((langs).items(), reverse=True,
-                              key=lambda t: t[1].get("size"))
+                              key=lambda t: t[1].get(INDEX_KEY))
 
     delay_between = 150
     for i, (lang, data) in enumerate(sorted_languages):
