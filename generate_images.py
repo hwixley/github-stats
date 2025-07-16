@@ -59,9 +59,9 @@ async def generate_languages(s: Stats) -> None:
 
     langs = await s.languages
 
-    langs_total = sum([v.get("size", 0) for v in langs.values()])
+    langs_total = sum([v.get("occurrences", 0) for v in langs.values()])
     for key, value in langs.items():
-        langs[key]["prop"] = value.get("size", 0) / langs_total * 100
+        langs[key]["prop"] = value.get("occurrences", 0) / langs_total * 100
     progress = ""
     lang_list = ""
     sorted_languages = sorted((langs).items(), reverse=True,
